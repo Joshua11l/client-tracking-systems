@@ -1,0 +1,91 @@
+/* src/components/css-folder/ProfilePage.css */
+.profile-page {
+    margin-top: 50px;
+  }
+  
+  .back-button {
+    color: black;
+    font-size: 30px;
+    margin-bottom: 20px;
+    display: inline-block;
+    border: none;
+  }
+  
+  .profile-image {
+    position: relative;
+  }
+  
+  .profile-image img {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+  }
+  
+  .image-upload-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  .profile-image:hover .image-upload-overlay {
+    opacity: 1;
+  }
+  
+  .image-upload-input {
+    opacity: 0;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .upload-icon {
+    color: white;
+  }
+  
+  .info-container {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .profile-labels {
+    color: black !important;
+    font-weight: bold;
+  }
+
+  .button-profile {
+    font-weight: bold !important;
+    font-size: large !important;
+  }
+  
+  .back-arrow {
+    color: black !important;
+    font-size: 2.5rem !important;
+  }
+
+  .back-arrow:hover {
+    color: rgb(0, 127, 223) !important;
+  }
+
+  .update-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #1b9cff; /* Ocean blue */
+    color: white;
+    text-align: center;
+    padding: 10px 0;
+    font-size: 18px;
+    z-index: 1000;
+  }
+  

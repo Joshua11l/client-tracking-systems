@@ -1,0 +1,196 @@
+.dashboard-container {
+    height: 100vh;
+    width: 82.5vw !important;
+    display: flex;
+    flex-direction: column;
+    background-color: #f9f9f9;
+}
+
+
+/* Modal styling */
+.modal-card {
+  border: 1px solid black !important;
+}
+
+/* DashboardPage.css */
+
+.modal-open::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  backdrop-filter: blur(10px); /* Adjust the blur radius as needed */
+  z-index: 1; /* Make sure it's behind the modal but above other content */
+}
+
+
+
+
+.custom-input {
+  outline: 2px solid #d2d2d2; /* Adjust the color as needed */
+}
+
+
+
+.dash-head {
+    font-weight: 400 !important;
+    font-size: x-large;
+    color: rgb(0, 145, 255);
+}
+
+.dashboard-row {
+    flex: 1;
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+.dashboard-column {
+    overflow: hidden; /* Prevent scrolling on the column itself */
+    height: 100%;
+}
+
+
+
+.dashboard-title {
+    font-weight: normal; /* Remove bold */
+}
+
+
+
+/* DashboardPage.css */
+.dashboard-container {
+    padding: 20px;
+  }
+  
+  .main-head {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  
+  
+  .divider {
+    border-top: 2px solid #000;
+  }
+  
+  .scrollable-content {
+    max-height: calc(100vh - 150px);
+    overflow-y: auto;
+  }
+  
+  .border-dark {
+    border: 1px solid black !important;
+  }
+  
+
+
+
+.modal-card {
+    border: 1px solid black !important; /* Black border */
+}
+
+.main-head {
+    color: black;
+    font-size: 3rem;
+    font-weight: bold !important;
+}
+
+.scrollable-content {
+    max-height: calc(80vh - 1rem); /* Dynamically adjust height */
+    overflow-y: auto; /* Allow vertical scrolling */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    padding-right: 8px; /* Add padding to prevent content from being squished */
+}
+
+.scrollable-content::-webkit-scrollbar {
+    width: 8px; /* Adjust width as needed */
+    border-radius: 10px; /* Rounded ends */
+}
+
+.scrollable-content::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Adjust track color as needed */
+    border-radius: 10px; /* Rounded ends */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb {
+    background: #888; /* Adjust thumb color as needed */
+    border-radius: 10px; /* Rounded ends */
+}
+
+.scrollable-content::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Adjust thumb hover color as needed */
+    border-radius: 10px; /* Rounded ends */
+}
+
+
+.divider {
+    border-top: 1.5px solid #c7c7c7; /* Adjust color as needed */
+    margin-top: 0.5rem; /* Adjust spacing as needed */
+    margin-bottom: 0.5rem; /* Adjust spacing as needed */
+}
+
+/* Add your existing styles */
+
+.update-title {
+  color: black;
+  font-weight: bold;
+  font-size: large;
+}
+
+/* Custom Banner styling */
+.custom-banner {
+  position: fixed;
+  bottom: 0;
+  left: 0; /* Ensure it covers the sidebar */
+  right: 0; /* Ensure it covers the entire width */
+  width: 100%;
+  background-color: #1b9cff; /* Light ocean blue background */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 18px;
+  z-index: 10000;
+}
+
+
+.icons-divider {
+    border-top: 1px solid #000;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+
+ .add-client-label {
+  background-color: rgb(0, 145, 255) !important;
+  font-weight: bold !important;
+border: solid 2px rgb(0, 0, 0) !important;
+}
+
+.add-client-label:hover {
+  background-color: rgb(0, 0, 0) !important;
+
+}
+  
+  .icon-action:hover {
+    color: rgb(0, 145, 255);
+  }
+
+
+.icon-action {
+    cursor: pointer;
+    font-size: 1.5rem;
+  }
+  
+  .red-icon {
+    color: rgba(0, 0, 0, 0.6);
+  }
+  
+  .black-icon {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  .red-icon:hover {
+    color: rgb(206, 0, 0);
+  }

@@ -1,0 +1,116 @@
+.custom-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding-top: 20px;
+  background-color: #000000; /* Ensure background is black */
+  border-right: 1px solid rgba(0, 0, 0, 0.1); /* Add a faint right border */
+  position: relative; /* Ensure the sidebar profile can be positioned absolutely */
+  z-index: 1; /* Ensure it sits on top of other elements */
+}
+
+.header {
+  display: flex;         /* Use flexbox to align items in a row */
+  align-items: center;   /* Vertically align items */
+}
+
+.header .logo {
+  margin-right: 10px;    /* Space between image and h1 */
+}
+
+.header h1 {
+  color: white;          /* Set h1 text color to white */
+  margin: 0;   
+  font-size: large;  
+  font-weight: 800;        /* Remove any default margin */
+}
+
+
+.logo {
+  width: 50px;
+  height: auto;
+  margin-top: .5rem;
+  margin-bottom: .5rem;
+  margin-left: 1rem;
+}
+
+.divider {
+  border-top: 1px solid rgba(255, 255, 255, 1) !important;
+  margin-top: 10px;
+  margin-bottom: 20px;
+}
+
+.custom-nav {
+  flex: 1; /* Take up remaining space */
+}
+
+.custom-nav .nav-link-custom {
+  font-size: 24px;
+  margin: 10px 0;
+  padding: 10px 0;
+  font-weight: bold;
+  color: rgba(255, 255, 255) !important;
+  transition: color 0.3s ease, border 0.3s ease; /* Add transition for border */
+}
+
+.nav-link-custom {
+  margin-left: 1rem !important;
+}
+
+.custom-nav .nav-link-custom:hover {
+  color: rgb(30, 157, 255) !important;
+  border-left: 3px solid rgb(30, 157, 255); /* Add left border on hover */
+}
+
+.custom-nav .nav-link-custom .fa-icon {
+  color: rgba(255, 255, 255) !important;
+  transition: color 0.3s ease;
+}
+
+.custom-nav .nav-link-custom:hover .fa-icon {
+  color: rgb(30, 157, 255) !important;
+}
+
+.custom-nav .nav-link-custom.active {
+  color: rgb(30, 157, 255) !important;
+  border-left: 3px solid rgb(30, 157, 255); /* Add left border for active link */
+}
+
+.custom-nav .nav-link-custom.active .fa-icon {
+  color: rgb(30, 157, 255)  !important;
+}
+
+.sidebar-divider {
+  border-top: 1px solid rgba(255, 255, 255, 1);
+  margin: 10px 0;
+  width: 100%;
+}
+
+.sidebar-profile-container {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.sidebar-profile-name {
+  color: white;
+}
+
+.sidebar-profile {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.sidebar-profile-img {
+  width: 50px;
+  height: 50px;
+  border-radius: 100% !important;
+  margin-right: 10px;
+}
+
+.sidebar-profile-name {
+  font-size: 18px;
+  font-weight: bold;
+}

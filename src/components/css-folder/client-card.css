@@ -1,0 +1,98 @@
+.client-name {
+    font-size: x-large !important;
+    font-weight: bold !important;
+}
+
+.client-desc {
+    margin-top: -15px;
+    font-size: large;
+}
+
+.url-client {
+    margin-top: -15px;
+    font-size: large;
+font-weight: bold;
+}
+
+.client-date {
+    margin-top: -8px;
+    font-size: large;
+}
+
+
+
+.client-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .status-container {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+  }
+
+  .search-clients {
+    color: rgb(0, 145, 255) !important;
+    font-size: x-large !important;
+  }
+  
+  .status-label {
+    font-size: 1rem !important;
+    padding: 0.4em 0.6em;
+    border-radius: 70px;
+    background-color: #007bff;
+    color: white;
+    display: inline-block;
+    text-align: center;
+    width: 120px !important;
+    margin-left:  .5rem !important;
+  }
+  
+  .card {
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .client-name {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .icon-action {
+    font-size: xx-large !important;
+  }
+
+  .client-progress-label {
+    background-color: rgb(0, 122, 216) !important;
+    color: white !important;
+    font-weight: bold !important;
+  }
+
+  .client-progress-label1 {
+    font-weight: bold !important;
+  }
+
+  .client-progress-label2 {
+    font-weight: bold !important;
+  }
+  
+  
+  
+  .status-label.completed {
+    background-color: #1da73d;
+    font-weight: bold;
+
+  }
+  
+  .status-label.in-progress {
+    background-color: rgb(0, 145, 255);
+    font-weight: bold;
+  }
+  
+  .card {
+    cursor: pointer;
+  }
+  

@@ -7,6 +7,35 @@
   pointer-events: none;
 }
 
+.password-input-container {
+  position: relative;
+}
+
+.password-input-container .form-control {
+  padding-right: 40px;
+}
+
+.login-banner {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: #1b9cff; /* Light ocean blue background */
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  font-size: 18px;
+  z-index: 10000;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #6c757d;
+}
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
