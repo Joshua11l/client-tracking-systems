@@ -36,7 +36,12 @@ const TeamMembersPage = () => {
         {currentMembers.map(member => (
           <Col key={member.id} lg={4} md={6} className="mt-4 pt-2">
             <div className="team text-center rounded p-3 py-4">
-              <img src={member.profileImage || "https://via.placeholder.com/100"} className="img-fluid avatar avatar-medium shadow rounded-pill" alt="" />
+              <img 
+                src={member.profileImage || "https://via.placeholder.com/100"} 
+                className="img-fluid avatar avatar-medium shadow rounded-circle" 
+                alt="" 
+                style={{ width: '150px', height: '150px' }} // Ensure square aspect ratio
+              />
               <div className="content mt-3">
                 <h4 className="title mb-0">{member.name}</h4>
                 <small className="text-muted">{member.position || 'Team Member'}</small>

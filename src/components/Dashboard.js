@@ -11,11 +11,14 @@ const DashboardPage = () => {
   const [clients, setClients] = useState([]);
   const [updates, setUpdates] = useState([]);
   const [showAddClientModal, setShowAddClientModal] = useState(false);
+  const [showEditClientModal, setShowEditClientModal] = useState(false);
   const [newClientName, setNewClientName] = useState('');
   const [newClientDate, setNewClientDate] = useState('');
   const [newClientDescription, setNewClientDescription] = useState('');
   const [newClientCompany, setNewClientCompany] = useState('');
+  const [newClientCompletionDate, setNewClientCompletionDate] = useState('');
   const [currentClientId, setCurrentClientId] = useState(null);
+  const [currentEditClient, setCurrentEditClient] = useState(null);
   const [showAddUpdateModal, setShowAddUpdateModal] = useState(false);
   const [selectedClientId, setSelectedClientId] = useState(null);
   const [showClientViewModal, setShowClientViewModal] = useState(false);
@@ -24,7 +27,7 @@ const DashboardPage = () => {
 
   useEffect(() => {
     const clientsCollection = collection(firestore, 'clients');
-    const q = query(clientsCollection, orderBy('date', 'desc'));
+    const q = query(clientsCollection, orderBy('date', 'desc')); // 'desc' for newest to oldest
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       const clientsData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
@@ -39,7 +42,7 @@ const DashboardPage = () => {
     const q = query(updatesCollection, orderBy('date', 'asc'));
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
-      const updatesData = querySnapshot.docs.map(doc => doc.data());
+      const updatesData = querySnapshot.docs.map(doc => ({ ...doc.data(), id: doc.id }));
       setUpdates(updatesData);
     });
 
@@ -47,7 +50,7 @@ const DashboardPage = () => {
   }, []);
 
   const handleAddClient = async () => {
-    if (!newClientName || !newClientDate || !newClientDescription || !newClientCompany) {
+    if (!newClientName || !newClientDate || !newClientDescription || !newClientCompany || !newClientCompletionDate) {
       alert('Please fill out all fields');
       return;
     }
@@ -55,9 +58,10 @@ const DashboardPage = () => {
     const newClientId = newClientName.replace(/\s+/g, '-').toLowerCase();
     await addDoc(collection(firestore, 'clients'), {
       name: newClientName,
-      date: newClientDate,
+      date: new Date(newClientDate).toISOString(), // Ensure date is saved as an ISO string
       description: newClientDescription,
       company: newClientCompany,
+      completionDate: new Date(newClientCompletionDate).toISOString(),
       completed: false,
       url: `${window.location.origin}/client/${newClientId}`
     });
@@ -65,8 +69,40 @@ const DashboardPage = () => {
     setNewClientDate('');
     setNewClientDescription('');
     setNewClientCompany('');
+    setNewClientCompletionDate('');
     setShowAddClientModal(false);
     setBannerMessage('Client Added Successfully!');
+    setShowBanner(true);
+    setTimeout(() => setShowBanner(false), 3000); // Hide banner after 3 seconds
+  };
+
+  const handleEditClient = (client) => {
+    setCurrentEditClient(client);
+    setNewClientName(client.name || '');
+    setNewClientDate(client.date || '');
+    setNewClientDescription(client.description || '');
+    setNewClientCompany(client.company || '');
+    setNewClientCompletionDate(client.completionDate || '');
+    setShowEditClientModal(true);
+  };
+
+  const handleUpdateClient = async () => {
+    if (!currentEditClient) return;
+
+    const updatedFields = {};
+
+    if (newClientName && newClientName !== currentEditClient.name) updatedFields.name = newClientName;
+    if (newClientDate && new Date(newClientDate).toString() !== 'Invalid Date') updatedFields.date = new Date(newClientDate).toISOString();
+    if (newClientDescription && newClientDescription !== currentEditClient.description) updatedFields.description = newClientDescription;
+    if (newClientCompany && newClientCompany !== currentEditClient.company) updatedFields.company = newClientCompany;
+    if (newClientCompletionDate && new Date(newClientCompletionDate).toString() !== 'Invalid Date') updatedFields.completionDate = new Date(newClientCompletionDate).toISOString();
+
+    const clientDoc = doc(firestore, 'clients', currentEditClient.id);
+    await updateDoc(clientDoc, updatedFields);
+
+    setShowEditClientModal(false);
+    setCurrentEditClient(null);
+    setBannerMessage('Client Updated Successfully!');
     setShowBanner(true);
     setTimeout(() => setShowBanner(false), 3000); // Hide banner after 3 seconds
   };
@@ -77,7 +113,10 @@ const DashboardPage = () => {
   };
 
   const saveUpdate = async (newUpdate) => {
-    await addDoc(collection(firestore, 'updates'), newUpdate);
+    await addDoc(collection(firestore, 'updates'), {
+      ...newUpdate,
+      date: new Date().toISOString(), // Ensure date is saved as an ISO string
+    });
     setShowAddUpdateModal(false);
     setCurrentClientId(null);
     setBannerMessage('Update Submitted Successfully!');
@@ -95,12 +134,19 @@ const DashboardPage = () => {
     await updateDoc(clientDoc, { completed: true });
   };
 
-  const inProgressClients = clients.filter(client => !client.completed);
+  const inProgressClients = clients.filter(client => !client.completed).sort((a, b) => new Date(b.date) - new Date(a.date));
+
+  const getLastUpdateDate = (clientId) => {
+    const clientUpdates = updates.filter(update => update.clientId === clientId);
+    if (clientUpdates.length === 0) return new Date(0);
+    return new Date(clientUpdates[clientUpdates.length - 1].date);
+  };
+
   const priorityClients = inProgressClients.slice().sort((a, b) => {
-    const lastUpdateA = updates.filter(update => update.clientId === a.id).pop();
-    const lastUpdateB = updates.filter(update => update.clientId === b.id).pop();
-    return new Date(lastUpdateA ? lastUpdateA.date : 0) - new Date(lastUpdateB ? lastUpdateB.date : 0);
+    return getLastUpdateDate(a.id) - getLastUpdateDate(b.id);
   });
+
+  console.log('Priority Clients:', priorityClients);
 
   return (
     <Container fluid className={`dashboard-container ${showAddClientModal || showAddUpdateModal || showClientViewModal ? 'modal-open' : ''}`}>
@@ -119,33 +165,43 @@ const DashboardPage = () => {
           <h2 className="dash-head">In Progress Projects</h2>
           <hr className="divider"/>
           <div className="scrollable-content">
-            <ClientList 
-              clients={inProgressClients.map(client => ({
-                ...client,
-                url: `${window.location.origin}/client/${client.id}`
-              }))}
-              onClientClick={handleClientClick}
-              onAddUpdate={handleAddUpdate} 
-              onCompleteClient={handleCompleteClient}
-            />
+            {inProgressClients.length === 0 ? (
+              <p>No clients in progress</p>
+            ) : (
+              <ClientList 
+                clients={inProgressClients.map(client => ({
+                  ...client,
+                  url: `${window.location.origin}/client/${client.id}`
+                }))}
+                onClientClick={handleClientClick}
+                onAddUpdate={handleAddUpdate} 
+                onCompleteClient={handleCompleteClient}
+                onEditClient={handleEditClient}
+              />
+            )}
           </div>
         </Col>
         <Col className="dashboard-column">
           <h2 className="dash-head">Priority Updates</h2>
           <hr className="divider"/>
           <div className="scrollable-content">
-            <Row>
-              <Col>
-                <ClientList 
-                  clients={priorityClients.map(client => ({
-                    ...client,
-                    url: `${window.location.origin}/client/${client.id}`
-                  }))}
-                  onClientClick={handleClientClick}
-                  onAddUpdate={handleAddUpdate} 
-                />
-              </Col>
-            </Row>
+            {priorityClients.length === 0 ? (
+              <p>No clients in progress</p>
+            ) : (
+              <Row>
+                <Col>
+                  <ClientList 
+                    clients={priorityClients.map(client => ({
+                      ...client,
+                      url: `${window.location.origin}/client/${client.id}`
+                    }))}
+                    onClientClick={handleClientClick}
+                    onAddUpdate={handleAddUpdate} 
+                    onEditClient={handleEditClient}
+                  />
+                </Col>
+              </Row>
+            )}
           </div>
         </Col>
       </Row>
@@ -153,7 +209,7 @@ const DashboardPage = () => {
       {/* Add Client Modal */}
       <Modal show={showAddClientModal} onHide={() => setShowAddClientModal(false)} className="modal-card modal-card-large">
         <Modal.Header closeButton>
-          <Modal.Title >Add Client</Modal.Title>
+          <Modal.Title>Add Client</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <Form>
@@ -198,6 +254,19 @@ const DashboardPage = () => {
             </Row>
             <Row className="mt-3">
               <Col>
+                <Form.Group controlId="formClientCompletionDate">
+                  <Form.Label className="text-black">Projected Completion Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    className="custom-input"
+                    value={newClientCompletionDate}
+                    onChange={(e) => setNewClientCompletionDate(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
                 <Form.Group controlId="formClientDescription">
                   <Form.Label className="text-black">Client Description</Form.Label>
                   <Form.Control
@@ -215,6 +284,87 @@ const DashboardPage = () => {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="primary" onClick={handleAddClient}>Save Changes</Button>
+        </Modal.Footer>
+      </Modal>
+
+      {/* Edit Client Modal */}
+      <Modal show={showEditClientModal} onHide={() => setShowEditClientModal(false)} className="modal-card modal-card-large">
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Client</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Row>
+              <Col>
+                <Form.Group controlId="formClientName">
+                  <Form.Label className="text-black">Client Full Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    className="custom-input"
+                    placeholder=""
+                    value={newClientName}
+                    onChange={(e) => setNewClientName(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col md={6}>
+                <Form.Group controlId="formClientDate">
+                  <Form.Label className="text-black">Client Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    className="custom-input"
+                    value={newClientDate}
+                    onChange={(e) => setNewClientDate(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+              <Col md={6}>
+                <Form.Group controlId="formClientCompany">
+                  <Form.Label className="text-black">Client Company Name</Form.Label>
+                  <Form.Control
+                    type="text"
+                    className="custom-input"
+                    placeholder=""
+                    value={newClientCompany}
+                    onChange={(e) => setNewClientCompany(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
+                <Form.Group controlId="formClientCompletionDate">
+                  <Form.Label className="text-black">Projected Completion Date</Form.Label>
+                  <Form.Control
+                    type="date"
+                    className="custom-input"
+                    value={newClientCompletionDate}
+                    onChange={(e) => setNewClientCompletionDate(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="mt-3">
+              <Col>
+                <Form.Group controlId="formClientDescription">
+                  <Form.Label className="text-black">Client Description</Form.Label>
+                  <Form.Control
+                    as="textarea"
+                    rows={3}
+                    className="custom-input"
+                    placeholder=""
+                    value={newClientDescription}
+                    onChange={(e) => setNewClientDescription(e.target.value)}
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="primary" onClick={handleUpdateClient}>Save Changes</Button>
         </Modal.Footer>
       </Modal>
 

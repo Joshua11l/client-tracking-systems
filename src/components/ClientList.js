@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { ListGroup, Card, Modal, Button } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEdit, faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEdit, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { firestore } from '../firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
 import '../components/css-folder/client-card.css';
 
-const ClientList = ({ clients, onAddUpdate, onClientClick }) => {
+const ClientList = ({ clients, onAddUpdate, onClientClick, onEditClient }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [clientToDelete, setClientToDelete] = useState(null);
 
@@ -32,6 +32,7 @@ const ClientList = ({ clients, onAddUpdate, onClientClick }) => {
                 <Card.Text className='client-date'><strong>Date:</strong> {new Date(client.date).toLocaleDateString()}</Card.Text>
                 <Card.Text className='client-desc'><strong>Company:</strong> {client.company}</Card.Text>
                 <Card.Text className='client-desc'><strong>Description:</strong> {client.description}</Card.Text>
+                <Card.Text className='client-date'><strong>Projected Completion Date:</strong> {new Date(client.completionDate).toLocaleDateString()}</Card.Text>
                 <Card.Text className='url-client'><a href={client.url} target="_blank" rel="noopener noreferrer">Client URL</a></Card.Text>
                 <div className="status-container">
                   <span className={`status-label ${client.completed ? 'completed' : 'in-progress'}`}>
@@ -40,6 +41,14 @@ const ClientList = ({ clients, onAddUpdate, onClientClick }) => {
                 </div>
                 <hr className="icons-divider"/>
                 <div className="text-end">
+                  <FontAwesomeIcon 
+                    icon={faPencilAlt} 
+                    className="me-3 icon-action black-icon" 
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      onEditClient(client);
+                    }} 
+                  />
                   <FontAwesomeIcon 
                     icon={faEdit} 
                     className="me-3 icon-action black-icon" 
