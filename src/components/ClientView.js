@@ -253,7 +253,7 @@ const ClientView = () => {
               )}
             </div>
             <div className="d-flex justify-content-center mt-3">
-              <Button variant="link" classname='see-all' onClick={handleShowAllUpdates} style={{ color: 'black',   fontSize: '1.3rem' }}>
+              <Button variant="link" classname='see-all' onClick={handleShowAllUpdates} style={{ color: 'black',   fontSize: '1rem' }}>
                 See All <FontAwesomeIcon icon={faArrowRight} />
               </Button>
             </div>
