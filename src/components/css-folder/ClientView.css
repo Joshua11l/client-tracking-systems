@@ -132,3 +132,9 @@ header {
     overflow-y: auto;
   }
 }
+
+@media (max-width: 410px) {
+  .new-style {
+  font-size: x-large;
+  }
+  }

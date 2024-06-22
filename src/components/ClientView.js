@@ -186,7 +186,7 @@ const ClientView = () => {
         <Row className='might-work'>
           <Col>
             <h1 style={{ marginTop: '25vh', fontWeight: 'bold' }} className='might-work'>
-              <span style={{ color: 'black' }}>Project Progress: </span>
+              <span className = 'new-style' style={{ color: 'black' }}>Project Progress: </span>
               <span style={{ color: 'rgb(0, 137, 242)', }} >{clientName ? clientName : `Client ${clientId}`}</span>
             </h1>
           </Col>
