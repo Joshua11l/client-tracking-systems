@@ -253,7 +253,7 @@ const ClientView = () => {
               )}
             </div>
             <div className="d-flex justify-content-center mt-3">
-              <Button variant="link" classname='see-all' onClick={handleShowAllUpdates} style={{ color: 'black',   fontSize: '1rem' }}>
+              <Button variant="link" classname='see-all' onClick={handleShowAllUpdates} style={{ color: 'black', fontSize: '1rem' }}>
                 See All <FontAwesomeIcon icon={faArrowRight} />
               </Button>
             </div>
@@ -270,7 +270,7 @@ const ClientView = () => {
                 defaultView="agenda"
                 views={['agenda']}
                 showMultiDayTimes={false}
-                eventPropGetter={() => ({ style: { cursor: 'default', fontWeight: 300, fontSize: 'medium', backgroundColor: 'white', marginTop: '10px',} })}
+                eventPropGetter={() => ({ style: { cursor: 'default', fontWeight: 300, fontSize: 'medium', backgroundColor: 'white', marginTop: '10px', } })}
                 components={{
                   event: ({ event }) => (
                     <span>
@@ -360,14 +360,18 @@ const ClientView = () => {
             <Modal.Title className='modal-head1'>All Updates</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            {[...newUpdates, ...pastUpdates].map(update => (
-              <Card key={update.id} onClick={() => handleUpdateClick(update)} style={{ marginBottom: '10px', cursor: 'pointer' }}>
-                <Card.Body>
-                  <Card.Title>{update.title}</Card.Title>
-                  <Card.Text>{convertToDate(update.date).toLocaleString()}</Card.Text>
-                </Card.Body>
-              </Card>
-            ))}
+            {[...newUpdates, ...pastUpdates].length > 0 ? (
+              [...newUpdates, ...pastUpdates].map(update => (
+                <Card key={update.id} onClick={() => handleUpdateClick(update)} style={{ marginBottom: '10px', cursor: 'pointer' }}>
+                  <Card.Body>
+                    <Card.Title>{update.title}</Card.Title>
+                    <Card.Text>{convertToDate(update.date).toLocaleString()}</Card.Text>
+                  </Card.Body>
+                </Card>
+              ))
+            ) : (
+              <Alert variant="info">No updates just yet.</Alert>
+            )}
           </Modal.Body>
         </Modal>
       )}
