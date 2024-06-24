@@ -32,7 +32,7 @@ const Footer = () => {
             {/* Newsletter Section */}
             <div className="mb-2">
               <p className="pt-2 mb-0 news-1">
-                <strong>Sign up for our newsletter:</strong>
+                <strong>Sign Up For Our Newsletter</strong>
               </p>
               <NewsletterForm /> {/* Use the NewsletterForm component here */}
             </div>
