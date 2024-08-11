@@ -4,12 +4,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, firestore } from '../firebase';
-import { setDoc, doc } from 'firebase/firestore';
+import { setDoc, doc, getDoc } from 'firebase/firestore';
+import { allowedUsers } from '../allowedEmails'; // Correct the path to allowedEmails.js
 import logo from '../logo.PNG';
 import './css-folder/login.css';
-
-// Access the environment variable and split it into an array
-const allowedEmails = process.env.REACT_APP_ALLOWED_EMAILS.split(',');
 
 const Login = ({ error, loading }) => {
   const [email, setEmail] = useState('');
@@ -17,16 +15,34 @@ const Login = ({ error, loading }) => {
   const [name, setName] = useState(''); // Declare name state
   const [position, setPosition] = useState(''); // Declare position state
   const [showPassword, setShowPassword] = useState(false);
+  const [showSecurityPassword, setShowSecurityPassword] = useState(false); // New state for security password visibility
+  const [securityPassword, setSecurityPassword] = useState(''); // For the security password
   const [signUpError, setSignUpError] = useState('');
   const [isLoading, setIsLoading] = useState(false); // Loading state
   const [loginError, setLoginError] = useState(''); // Error state for login
 
-  const togglePasswordVisibility = () => {
-    setShowPassword(!showPassword);
+  const togglePasswordVisibility = (field) => {
+    if (field === 'password') {
+      setShowPassword(!showPassword);
+    } else if (field === 'securityPassword') {
+      setShowSecurityPassword(!showSecurityPassword);
+    }
   };
 
   const isEmailAllowed = (email) => {
-    return allowedEmails.includes(email);
+    return allowedUsers.some(user => user.email === email);
+  };
+
+  const verifySecurityPassword = async () => {
+    const docRef = doc(firestore, 'access', 'loginPassword');
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      const storedPassword = docSnap.data().password;
+      return securityPassword === storedPassword;
+    } else {
+      throw new Error('Security password not found in database.');
+    }
   };
 
   const handleSignUp = async (e) => {
@@ -39,6 +55,14 @@ const Login = ({ error, loading }) => {
         setIsLoading(false);
         return;
       }
+
+      const isPasswordCorrect = await verifySecurityPassword();
+      if (!isPasswordCorrect) {
+        setSignUpError("Incorrect security password.");
+        setIsLoading(false);
+        return;
+      }
+
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       await setDoc(doc(firestore, 'users', userCredential.user.uid), { name, email, position });
       setIsLoading(false);
@@ -60,6 +84,14 @@ const Login = ({ error, loading }) => {
         setIsLoading(false);
         return;
       }
+
+      const isPasswordCorrect = await verifySecurityPassword();
+      if (!isPasswordCorrect) {
+        setLoginError("Incorrect security password.");
+        setIsLoading(false);
+        return;
+      }
+
       await signInWithEmailAndPassword(auth, email, password);
       setIsLoading(false);
     } catch (error) {
@@ -102,7 +134,23 @@ const Login = ({ error, loading }) => {
                       />
                       <FontAwesomeIcon
                         icon={showPassword ? faEyeSlash : faEye}
-                        onClick={togglePasswordVisibility}
+                        onClick={() => togglePasswordVisibility('password')}
+                        className="password-toggle-icon"
+                      />
+                    </div>
+                  </Form.Group>
+                  <Form.Group controlId="formSecurityPassword" className="mt-3">
+                    <Form.Label>Security Password:</Form.Label>
+                    <div className="password-input-container">
+                      <Form.Control
+                        type={showSecurityPassword ? 'text' : 'password'}
+                        placeholder="Enter the security password"
+                        value={securityPassword}
+                        onChange={(e) => setSecurityPassword(e.target.value)}
+                      />
+                      <FontAwesomeIcon
+                        icon={showSecurityPassword ? faEyeSlash : faEye}
+                        onClick={() => togglePasswordVisibility('securityPassword')}
                         className="password-toggle-icon"
                       />
                     </div>
@@ -155,7 +203,23 @@ const Login = ({ error, loading }) => {
                       />
                       <FontAwesomeIcon
                         icon={showPassword ? faEyeSlash : faEye}
-                        onClick={togglePasswordVisibility}
+                        onClick={() => togglePasswordVisibility('password')}
+                        className="password-toggle-icon"
+                      />
+                    </div>
+                  </Form.Group>
+                  <Form.Group controlId="formSecurityPassword" className="mt-3">
+                    <Form.Label>Security Password:</Form.Label>
+                    <div className="password-input-container">
+                      <Form.Control
+                        type={showSecurityPassword ? 'text' : 'password'}
+                        placeholder="Enter the security password"
+                        value={securityPassword}
+                        onChange={(e) => setSecurityPassword(e.target.value)}
+                      />
+                      <FontAwesomeIcon
+                        icon={showSecurityPassword ? faEyeSlash : faEye}
+                        onClick={() => togglePasswordVisibility('securityPassword')}
                         className="password-toggle-icon"
                       />
                     </div>
