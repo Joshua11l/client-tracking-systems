@@ -5,9 +5,11 @@ import { faEye, faEyeSlash } from '@fortawesome/free-solid-svg-icons';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth, firestore } from '../firebase';
 import { setDoc, doc } from 'firebase/firestore';
-import { allowedUsers } from '../allowedEmails'; // Correct the path to allowedEmails.js
 import logo from '../logo.PNG';
 import './css-folder/login.css';
+
+// Access the environment variable and split it into an array
+const allowedEmails = process.env.REACT_APP_ALLOWED_EMAILS.split(',');
 
 const Login = ({ error, loading }) => {
   const [email, setEmail] = useState('');
@@ -24,7 +26,7 @@ const Login = ({ error, loading }) => {
   };
 
   const isEmailAllowed = (email) => {
-    return allowedUsers.some(user => user.email === email);
+    return allowedEmails.includes(email);
   };
 
   const handleSignUp = async (e) => {
