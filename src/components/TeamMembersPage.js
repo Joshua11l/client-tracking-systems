@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Container, Row, Col, Pagination } from 'react-bootstrap';
 import { getDocs, collection } from 'firebase/firestore';
 import { firestore } from '../firebase';
-import './css-folder/TeamMembersPage.css';
+import '../styles/TeamMembersPage.css';
 
 const TeamMembersPage = () => {
   const [teamMembers, setTeamMembers] = useState([]);

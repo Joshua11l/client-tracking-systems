@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowLeft, faUpload } from '@fortawesome/free-solid-svg-icons';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebase';
-import './css-folder/ProfilePage.css';
+import '../styles/ProfilePage.css';
 
 const placeholderImage = 'https://via.placeholder.com/150';
 

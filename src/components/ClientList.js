@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEdit, faTrash, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import { firestore } from '../firebase';
 import { doc, deleteDoc } from 'firebase/firestore';
-import '../components/css-folder/client-card.css';
+import '../styles/client-card.css';
 
 const ClientList = ({ clients, onAddUpdate, onClientClick, onEditClient }) => {
   const [showDeleteModal, setShowDeleteModal] = useState(false);

@@ -14,7 +14,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
-import './css-folder/AnalyticsPage.css';  // Import CSS for styling
+import '../styles/AnalyticsPage.css';  // Import CSS for styling
 
 ChartJS.register(
   CategoryScale,

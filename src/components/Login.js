@@ -6,8 +6,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'fire
 import { auth, firestore } from '../firebase';
 import { setDoc, doc, getDoc } from 'firebase/firestore';
 import { allowedUsers } from '../allowedEmails'; // Correct the path to allowedEmails.js
-import logo from '../logo.PNG';
-import './css-folder/login.css';
+import '../styles/login.css';
 
 const Login = ({ error, loading }) => {
   const [email, setEmail] = useState('');
@@ -107,8 +106,7 @@ const Login = ({ error, loading }) => {
         <Row className="justify-content-md-center">
           <Col md={6}>
             <div className="text-center">
-              <img src={logo} alt="Divine Software Systems Logo" className="mb-4 logo-1" />
-              <h1 className="mb-4 dss-font">Divine Software Systems</h1>
+              <h1 className="mb-4 dss-font">Client Progress Tracker</h1>
             </div>
             <Tabs defaultActiveKey="login" id="login-signup-tabs" className="mb-3">
               <Tab eventKey="login" title="Login">

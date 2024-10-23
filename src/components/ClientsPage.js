@@ -4,7 +4,7 @@ import { firestore } from '../firebase';
 import { collection, getDocs } from 'firebase/firestore';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import './css-folder/client-card.css';  // Assuming you have a CSS file for styling
+import '../styles/client-card.css';  // Assuming you have a CSS file for styling
 
 const ClientsPage = () => {
   const [clients, setClients] = useState([]);

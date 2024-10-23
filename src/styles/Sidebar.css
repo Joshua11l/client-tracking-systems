@@ -9,6 +9,12 @@
   z-index: 1; /* Ensure it sits on top of other elements */
 }
 
+.siderbar-name {
+  margin-left: 1rem !important;
+  margin-top: 1rem !important;
+  margin-bottom: 1rem !important;
+}
+
 .header {
   display: flex;         /* Use flexbox to align items in a row */
   align-items: center;   /* Vertically align items */

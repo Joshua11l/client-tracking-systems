@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal, Button, Spinner, Alert, Accordion } from 'react-bootstrap';
 import { doc, getDoc, collection, query, where, orderBy, getDocs, updateDoc } from 'firebase/firestore';
 import { firestore } from '../firebase';
-import './css-folder/ClientMiniatureView.css';  // Assuming you have a CSS file for styling
+import '../styles/ClientMiniatureView.css';  // Assuming you have a CSS file for styling
 
 const ClientMiniatureView = ({ clientId, show, handleClose }) => {
   const [clientData, setClientData] = useState(null);

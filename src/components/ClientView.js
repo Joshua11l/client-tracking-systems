@@ -6,11 +6,9 @@ import { collection, query, where, orderBy, onSnapshot, doc, getDoc, updateDoc }
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
-import '../components/css-folder/ClientView.css';  // Import the CSS file
-import logo from '../logo.PNG'; // Make sure to update the path to your logo file
+import '../styles/ClientView.css';  // Import the CSS file
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
-import Footer from './Footer'; // Import the Footer component
 
 const localizer = momentLocalizer(moment);
 
@@ -179,8 +177,7 @@ const ClientView = () => {
   return (
     <Container fluid className="container-custom" style={{ padding: 0 }}>
       <header className="text-center p-3 mb-4 jumbo" style={{ backgroundColor: 'black', color: 'white', height: '20vh', display: 'flex', alignItems: 'center', justifyContent: 'center', width: '100vw', position: 'absolute', top: 0 }}>
-        <img src={logo} alt="Divine Software Systems Logo" className="me-3" style={{ height: '60px' }} />
-        <span style={{ fontSize: '3rem', fontWeight: 'bold' }} className='top-head'>Divine Software Systems</span>
+        <span style={{ fontSize: '3rem', fontWeight: 'bold' }} className='top-head'>Client Progress Tracker</span>
       </header>
       <Container>
         <Row className='might-work'>
@@ -392,7 +389,6 @@ const ClientView = () => {
         </Alert>
       )}
 
-      <Footer /> {/* Add the Footer component here */}
     </Container>
   );
 };

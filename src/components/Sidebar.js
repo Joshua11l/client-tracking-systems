@@ -8,8 +8,7 @@ import { faTachometerAlt, faChartLine, faUsers, faUsersCog } from '@fortawesome/
 import { getAuth } from 'firebase/auth';
 import { doc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebase'; // Correct import path
-import placeholderLogo from './logo.PNG'; // Ensure you have a placeholder image in assets
-import './css-folder/Sidebar.css'; // Import the custom CSS file
+import '../styles/Sidebar.css'; // Import the custom CSS file
 
 const Sidebar = () => {
   const [profileImage, setProfileImage] = useState('https://via.placeholder.com/150');
@@ -31,8 +30,7 @@ const Sidebar = () => {
     <Navbar expand="lg" className="flex-column vh-100 sticky-top custom-sidebar">
       <Container className="flex-column align-items-start p-0">
         <Navbar.Brand className="w-100 p-0 header">
-        <img src={placeholderLogo} className="logo" alt="Logo" />
-        <h1>Progress Tracker</h1>
+        <h1 className='siderbar-name'>Progress Tracker</h1>
         </Navbar.Brand>
         <hr className="sidebar-divider" />
 
@@ -41,18 +39,7 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faTachometerAlt} className="me-2 fa-icon" />
             Dashboard
           </Nav.Link>
-          <Nav.Link as={NavLink} to="/admin/analytics" className="d-flex align-items-center nav-link-custom">
-            <FontAwesomeIcon icon={faChartLine} className="me-2 fa-icon" />
-            Analytics
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/admin/clients" className="d-flex align-items-center nav-link-custom">
-            <FontAwesomeIcon icon={faUsers} className="me-2 fa-icon" />
-            Clients
-          </Nav.Link>
-          <Nav.Link as={NavLink} to="/admin/team-members" className="d-flex align-items-center nav-link-custom">
-            <FontAwesomeIcon icon={faUsersCog} className="me-2 fa-icon" />
-            Team Members
-          </Nav.Link>
+          
         </Nav>
         <div className="sidebar-profile-container">
           <hr className="sidebar-divider" />

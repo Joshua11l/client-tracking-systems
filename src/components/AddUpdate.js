@@ -3,7 +3,7 @@ import { Form, Button } from 'react-bootstrap';
 import { storage } from '../firebase'; // Import the storage object
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { auth } from '../firebase';
-import './css-folder/AddUpdate.css';
+import '../styles/AddUpdate.css';
 
 const AddUpdate = ({ onAdd, clientId }) => {
   const [title, setTitle] = useState('');

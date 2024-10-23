@@ -5,7 +5,7 @@ import { firestore } from '../firebase';
 import { collection, query, orderBy, onSnapshot, addDoc, updateDoc, doc } from 'firebase/firestore';
 import AddUpdate from './AddUpdate';
 import ClientMiniatureView from './ClientMiniatureView';
-import './css-folder/DashboardPage.css';
+import '../styles/DashboardPage.css';
 
 const DashboardPage = () => {
   const [clients, setClients] = useState([]);
