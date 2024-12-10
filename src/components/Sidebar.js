@@ -39,6 +39,10 @@ const Sidebar = () => {
             <FontAwesomeIcon icon={faTachometerAlt} className="me-2 fa-icon" />
             Dashboard
           </Nav.Link>
+          <Nav.Link as={NavLink} to="/admin/analytics" className="d-flex align-items-center nav-link-custom">
+            <FontAwesomeIcon icon={faTachometerAlt} className="me-2 fa-icon" />
+            Analytics
+          </Nav.Link>
           
         </Nav>
         <div className="sidebar-profile-container">

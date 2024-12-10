@@ -1,94 +1,58 @@
-.login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: rgb(233, 233, 233); /* Black background */
-  }
-  
-  .dss-font {
-    font-weight: bold !important;
-    font-size: 3rem;
-    margin-top: -1rem;
-    color: #ffffff;
-    margin-top: 2rem;
-  }
-  
-  .login-form-container {
-    padding: 30px;
-    border-radius: 10px;
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #ffff;
+}
 
-    box-shadow: 0 0 10px rgb(0, 0, 0);
-    background-color: black;
-  }
-  
-  .logo-1 {
-    max-width: 125px !important;
-    height: auto;
-  }
-  
-  .dss-font1 {
-    color: #ffffff;
-    font-weight: bold; /* Black */
-    font-size: 3rem;
-    margin-top: -1rem;
-    margin-bottom: -1rem !important;
-  }
-  
-  .form-label {
-    color: #ffffff; /* Black */
-  }
-  
-  .small-button {
-    padding: .8rem 0.5rem; /* Adjust padding as needed */
-    font-size: 1.2 !important; /* Adjust font size as needed */
-    width: 30%; /* Adjust width as needed */
-    display: block; /* Centering trick */
-    margin: 0 auto; /* Centering trick */
-    font-weight: bold;
-    font-size: large;
-    background-color: #1b9cff; /* Ocean color light blue */
-    border: none;
-  }
-  
-  .small-button:hover {
-    background-color: #005da4; /* Darker shade of Ocean color */
-  }
-  
-  .loading-spinner {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-  }
-  
-  @keyframes spin {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
-  
-  .spinner-border {
-    width: 2rem;
-    height: 2rem;
-    border: 0.4em solid #1b9cff;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: spin 0.75s linear infinite;
-  }
-  
-  /* Make tabs, buttons, and form labels bold */
-.nav-tabs .nav-link {
-    font-weight: bold;
-  }
-  
-  button, .btn {
-    font-weight: bold;
-  }
-  
-  .form-label {
-    font-weight: bold;
-  }
-  
-  .small-button {
-    font-weight: bold;
-  }
-  
+.login-container {
+  background-color: #fafafa;
+  margin-top: 8rem;
+  padding: 40px 30px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.login-logo {
+  width: 120px;
+  height: auto;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #333333;
+}
+
+.login-form .form-label {
+  font-weight: 600;
+  color: #555555;
+}
+
+.login-button {
+  background-color: #ff9800;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.login-button:hover {
+  background-color: #e68900;
+}
+
+.password-input-container {
+  position: relative;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: #888888;
+}

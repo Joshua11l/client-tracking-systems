@@ -4,6 +4,7 @@ import { Route, Routes, Navigate, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import Sidebar from './Sidebar';
 import DashboardPage from './Dashboard';
+import AnalyticsPage from './AnalyticsPage';
 import ClientsPage from './ClientsPage';
 import ProfilePage from './ProfilePage';
 
@@ -32,7 +33,19 @@ const AdminDashboard = ({ onAddUpdate }) => {
                   </motion.div>
                 }
               />
-              
+              <Route
+                path="analytics"
+                element={
+                  <motion.div
+                    initial={{ opacity: 0, x: -50 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: 50 }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    <AnalyticsPage />
+                  </motion.div>
+                }
+              />
               <Route
                 path="clients"
                 element={
@@ -59,7 +72,7 @@ const AdminDashboard = ({ onAddUpdate }) => {
                   </motion.div>
                 }
               />
-              
+             
               <Route path="/" element={<Navigate to="dashboard" />} />
             </Routes>
           </AnimatePresence>
