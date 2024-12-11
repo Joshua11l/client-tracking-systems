@@ -16,10 +16,8 @@ Ensure you have the following installed:
 
 To get started, clone the repository using the command:
 ```bash
-git clone <repository-url>
+git clone <https://github.com/Joshua11l/client-tracking-systems.git>
 ```
-Replace `<repository-url>` with the URL of this repository.
-
 ### Install Dependencies
 
 Navigate to the project directory and install the required dependencies:
