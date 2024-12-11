@@ -4,7 +4,7 @@ import { getAuth } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faArrowLeft, faUpload } from '@fortawesome/free-solid-svg-icons';
+import { faUpload } from '@fortawesome/free-solid-svg-icons';
 import { doc, setDoc, getDoc } from 'firebase/firestore';
 import { firestore } from '../firebase';
 import '../styles/ProfilePage.css';
@@ -77,9 +77,6 @@ const ProfilePage = ({ handleLogout }) => {
 
   return (
     <Container fluid className="profile-page">
-      <Button variant="link" className="back-button1" onClick={() => navigate(-1)}>
-        <FontAwesomeIcon className='back-arrow' icon={faArrowLeft} size="2x" />
-      </Button>
       <Row className="align-items-center justify-content-center mb-3">
         <Col md={6}>
           <h1 className="text-center mb-4 main-head">Profile Page</h1>

@@ -2,6 +2,7 @@
     height: 100vh;
     width: 82.5vw !important;
     display: flex;
+    padding: 25px !important;
     flex-direction: column;
     background-color: #f9f9f9;
 }
@@ -94,7 +95,7 @@
 
 .main-head {
     color: black;
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold !important;
 }
 
@@ -163,7 +164,7 @@
   }
 
  .add-client-label {
-  background-color: rgb(0, 145, 255) !important;
+  background-color: #004a8f !important;
   font-weight: bold !important;
 border: solid 2px rgb(0, 0, 0) !important;
 }

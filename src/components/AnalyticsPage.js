@@ -196,7 +196,7 @@ const AnalyticsPage = () => {
   }, []);
 
   return (
-    <Container className="mt-5 analytics-con">
+    <Container className="mt-5 dashboard-container">
       <Row className="align-items-center justify-content-between mb-3">
         <Col>
           <h1 className="main-head">Analytics</h1>

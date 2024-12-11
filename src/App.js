@@ -7,7 +7,6 @@ import { doc, setDoc, getDoc } from 'firebase/firestore';
 import AdminDashboard from './components/AdminDashboard';
 import ClientsPage from './components/ClientsPage';
 import ClientView from './components/ClientView';
-import ProfilePage from './components/ProfilePage';
 import Login from './components/Login';
 import { allowedUsers } from './allowedEmails';
 import './App.css';
@@ -118,18 +117,7 @@ const AppRoutes = ({ user, email, setEmail, password, setPassword, handleLogin, 
         } />
         <Route path="/clients" element={<ClientsPage />} />
         <Route path="/client/:clientId" element={<ClientView />} />
-        <Route path="/admin/profile" element={
-          user ? (
-            <ProfilePage
-              name={user.displayName}
-              email={user.email}
-              handleLogout={handleLogout}
-              handleDeleteAccount={() => {}}
-            />
-          ) : (
-            <Navigate to="/admin" />
-          )
-        } />
+         
         <Route path="/" element={<Navigate to="/admin" />} />
       </Routes>
       {showBanner && (
