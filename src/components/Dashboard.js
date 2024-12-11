@@ -225,7 +225,7 @@ const DashboardPage = () => {
           <hr className="divider"/>
 
           <Row className="mb-3">
-            <Col xs={7}>
+            <Col xs={8}>
               <InputGroup>
                 <InputGroup.Text><FontAwesomeIcon icon={faSearch} /></InputGroup.Text>
                 <Form.Control
@@ -236,11 +236,11 @@ const DashboardPage = () => {
                 />
               </InputGroup>
             </Col>
-            <Col xs={5}>
+            <Col xs={4}>
               <InputGroup>
                 <InputGroup.Text><FontAwesomeIcon icon={faFilter} /></InputGroup.Text>
                 <Form.Select value={sortOrder} onChange={(e) => setSortOrder(e.target.value)}>
-                  <option value="default">Sort</option>
+                  <option value="default">Filter</option>
                   <option value="az">A-Z</option>
                 </Form.Select>
               </InputGroup>

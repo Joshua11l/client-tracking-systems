@@ -41,7 +41,7 @@
 }
 
 .nav-link-custom {
-  font-size: 1rem;
+  font-size: large !important;
   margin: 10px 0;
   padding: 10px 20px;
   font-weight: 500;
@@ -57,6 +57,8 @@
 
 .nav-link-custom:hover {
   color: #1e9dff !important;
+  font-weight: 550;
+
   background-color: rgba(30, 157, 255, 0.1);
 }
 
@@ -66,6 +68,7 @@
 
 .nav-link-custom.active {
   color: #1e9dff !important;
+  font-weight: 550;
   background-color: rgba(30, 157, 255, 0.2);
 }
 
