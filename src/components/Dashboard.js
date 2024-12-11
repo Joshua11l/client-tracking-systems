@@ -276,10 +276,10 @@ const DashboardPage = () => {
         {/* Right Column: Selected Client Details & Completed Clients */}
         <Col 
           md={7} 
-          className="dashboard-column d-flex flex-column" 
+          className="dashboard-column " 
           style={{ padding: '20px', overflowY: 'auto'}}
         >
-          <h2 className="dash-head" style={{ color: '#004a8f', marginBottom: '10px' }}>Client Details</h2>
+          <h2 className="dash-head" style={{ color: '#004a8f', marginBottom: '20px' }}>Client Details</h2>
           <hr className="divider"/>
           <div className="flex-grow-1" style={{ overflowY: 'auto', marginBottom: '1rem', paddingBottom: '20px' }}>
             {selectedClient ? (
