@@ -31,7 +31,6 @@ const ClientList = ({ clients, onAddUpdate, onClientClick, onEditClient }) => {
                 <hr />
                 <Card.Text className='client-date'><strong>Date:</strong> {new Date(client.date).toLocaleDateString()}</Card.Text>
                 <Card.Text className='client-desc'><strong>Company:</strong> {client.company}</Card.Text>
-                <Card.Text className='client-desc'><strong>Description:</strong> {client.description}</Card.Text>
                 <Card.Text className='client-date'><strong>Projected Completion Date:</strong> {new Date(client.completionDate).toLocaleDateString()}</Card.Text>
                 <Card.Text className='url-client'><a href={client.url} target="_blank" rel="noopener noreferrer">Client URL</a></Card.Text>
                 <div className="status-container">
